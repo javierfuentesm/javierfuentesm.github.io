@@ -1,7 +1,33 @@
 <!DOCTYPE html>
+
 <html>
 <body>
 <h1>Hello World</h1>
 <p>I'm hosted with GitHub Pages.</p>
+<link rel="stylesheet" href="main.css">
+
+<form id="groupForm" method="post">
+
+  Nombre del Grupo
+  <br>
+  <input type="text" id="groupname" value="">
+  <br>
+  Contraseña de Grupo
+  <br>
+  <input type="text" id="password" value="">
+  <br>
+  <button type='submit'> Enviar</button>
+
+  <h4>READ/DELETE Grupos</h4>
+    <ul id='grupos'></ul>
+</form>
 </body>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+<script src="script.js">
+
+</script>
 </html>
