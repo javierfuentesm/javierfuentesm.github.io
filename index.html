@@ -1,26 +1,30 @@
-<!DOCTYPE html>
 
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<link rel="stylesheet" href="main.css">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Firebase realtime database CRUD example</title>
+     <link rel="stylesheet" href="main.css">
+   </head>
+<div class='container'>
 
-<form id="groupForm" method="post">
+<form id="groupForm">
+  <input type="hidden" id='hiddenId' />
 
   Nombre del Grupo
   <br>
-  <input type="text" id="groupname" value="">
+  <input type="text" id="groupname">
   <br>
   Contraseña de Grupo
   <br>
-  <input type="text" id="password" value="">
+  <input type="text" id="password">
   <br>
   <button type='submit'> Enviar</button>
 
   <h4>READ/DELETE Grupos</h4>
     <ul id='grupos'></ul>
 </form>
+
+</div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>

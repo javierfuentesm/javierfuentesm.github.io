@@ -9,22 +9,10 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
-console.log("groupname");
 var groupForm = document.getElementById('groupForm');
-
-groupForm.addEventListener('submit', (e) => {
-
-
-
-var groupname = document.getElementById('groupname').value;
-var password = document.getElementById('password').value;
-
-firebase.database().ref('Grupos/'+ groupname).set({
-  contra: password,
-  name: groupname
-});
-
-});
+var groupname = document.getElementById('groupname');
+var password = document.getElementById('password');
+var hiddenId   = document.getElementById('hiddenId');
 
 
 groupForm.addEventListener('submit', (e) => {
@@ -32,13 +20,17 @@ groupForm.addEventListener('submit', (e) => {
 
   if (!groupname.value || !password.value) return null
 
+  var id = hiddenId.value || Date.now()
 
-  db.ref('Grupos/'+ groupname).set({
-    contra: password
+  db.ref('Grupos/'+ id).set({
+    contra: password.value,
+    name: groupname.value
+
   });
 
-  groupname = "";
-  password = "";
+  groupname.value = '';
+  password.value = '';
+  hiddenId.value = '';
 });
 
 
@@ -51,36 +43,46 @@ gruposRef.on('child_added', (data) => {
   li.innerHTML = gruposTemplate(data.val())
   grupos.appendChild(li);
 })
+
+
+gruposRef.on('child_changed', (data) => {
+  var grupoNode = document.getElementById(data.key);
+  grupoNode.innerHTML = gruposTemplate(data.val());
+});
+
+gruposRef.on('child_removed', (data) => {
+  var grupoNode = document.getElementById(data.key);
+  grupoNode.parentNode.removeChild(grupoNode);
+});
+
+grupos.addEventListener('click', (e) => {
+  var grupoNode = e.target.parentNode;
+  // UPDATE REVEIW
+  if (e.target.classList.contains('edit')) {
+    password.value = grupoNode.querySelector('.contra').innerText;
+    groupname.value= grupoNode.querySelector('.name').innerText;
+    hiddenId.value = grupoNode.id;
+
+  // document.getElementById("groupname").value="pORQUE NO SALEE";
+  //  document.getElementById("password").innerHTML= password.value;
+
+  }
+
+  // DELETE REVEIW
+  if (e.target.classList.contains('delete')) {
+    var id = grupoNode.id;
+    console.log(id);
+    db.ref('Grupos/' + id).remove();
+  }
+});
+
+
+
 function gruposTemplate({name,contra}) {
   return `
-  <div class='name'>${name}</div>
-
+    <div class='name'>${name}</div>
     <div class='contra'>${contra}</div>
+    <button class='delete'>Delete</button>
+    <button class='edit'>Edit</button>
   `
 }
-/*
-
-class Grupo{
-  var groupname2;
-  var alumnos[];
-  var password;
-
-}
-
-class Alumno{
-  var idalumno;
-  var tareas[];
-
-}
-class Tareas{
-  var tareaname;
-  var comentario;
-  var calificacion;
-
-}
-
-var Grupo = new Grupo();
-
-Grupo.groupname2= groupname;
-Grupo.password=password;
-*/
