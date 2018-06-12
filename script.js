@@ -60,10 +60,12 @@ grupos.addEventListener('click', (e) => {
   // UPDATE REVEIW
   if (e.target.classList.contains('edit')) {
     password.value = grupoNode.querySelector('.contra').innerText;
-    groupname.value= grupoNode.querySelector('.name').innerText;
+   groupname.value= grupoNode.querySelector('.name').innerText;
     hiddenId.value = grupoNode.id;
-
-  // document.getElementById("groupname").value="pORQUE NO SALEE";
+console.log(password.value);
+console.log(groupname.value);
+console.log(hiddenId.value);
+  //document.getElementById("groupname").value="hola";
   //  document.getElementById("password").innerHTML= password.value;
 
   }
