@@ -9,6 +9,8 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
+
+
 var groupForm = document.getElementById('groupForm');
 var groupname = document.getElementById('groupname');
 var password = document.getElementById('password');
@@ -62,11 +64,6 @@ grupos.addEventListener('click', (e) => {
     password.value = grupoNode.querySelector('.contra').innerText;
    groupname.value= grupoNode.querySelector('.name').innerText;
     hiddenId.value = grupoNode.id;
-console.log(password.value);
-console.log(groupname.value);
-console.log(hiddenId.value);
-  //document.getElementById("groupname").value="hola";
-  //  document.getElementById("password").innerHTML= password.value;
 
   }
 
