@@ -34,7 +34,8 @@ Selecciona el Grupo del que deseas borrar la tarea
 
 <form id="deleteForm">
 
-  <select id="grupoDelete">
+  <select id="grupoDelete" onchange="selecttarea()">
+    <option >Selecciona un grupo</option>
 
   </select>
 
@@ -42,7 +43,7 @@ Selecciona el Grupo del que deseas borrar la tarea
 <br>
 
 Selecciona la tarea del grupo que deseas eliminar
-<select id="tareaDelete">
+<select id="tareaDelete" >
 
 </select>
 

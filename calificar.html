@@ -1,0 +1,52 @@
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Calificar a los alunos Polilibro</title>
+   <link rel="stylesheet" href="main.css">
+</head>
+<div class='container'>
+   <div class="header">
+      <h1>Polilibro</h1>
+      <h4>Calificar a alumnos grupos.</h4>
+   </div>
+   <form id="CalificacionForm">
+      Selecciona el Grupo
+      <br>
+      <select id="grupo" onchange="selectalumno()">
+        <option>Selecciona un grupo</option>
+      </select>
+      <br>
+      <br><br>
+   Selecciona El alumno que deseas calificar
+   <br><br>
+   <select id="alumno">
+   </select>
+   <br><br><br>
+   Selecciona la tarea que deseas Calificar
+   <select id="tarea" onchange="selectcalificacion()">
+     <option value="">Selecciona una tarea</option>
+   </select>
+
+   <br><br><br>
+   Calificacion
+   <input type="text" id="calificacion" >
+   <br>
+   Comentario
+   <br>
+   <input type="text" id="comentario" >
+   <br><br>
+
+   <button type='submit'> Guardar</button>
+
+ </form>
+  <br>
+   <br>
+</div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+<script src="calificar.js"></script>
+</html>

@@ -26,8 +26,8 @@
 
 
 
-  var refGrupos= db2.ref('Grupos/');
-  refGrupos.on("child_added",function(snapshot){
+    var refGrupos= db2.ref('Grupos/');
+    refGrupos.on("child_added",function(snapshot){
     var z = document.createElement("option");
     var z2 = document.createElement("option");
 
@@ -54,7 +54,10 @@
 
     var refAlumnos= db2.ref('Grupos/'+grupo.value+ "/Alumnos");
     refAlumnos.on("child_added",function(snapshot){
+    //db2.ref('Grupos/'+grupo.value+ "/Alumnos/"+snapshot.key+"/Tareas/").push({
       db2.ref('Grupos/'+grupo.value+ "/Alumnos/"+snapshot.key+"/Tareas/"+tareaname.value).set({
+
+        Nombre:tareaname.value,
         Calificacion: "Sin calificar",
         Comentario: "Sin Comentario"
 
@@ -63,22 +66,82 @@
     alert("Fue añadida con exito");
     grupo.value="";
     tareaname.value="";
+
+
+
 });
 
 // Metodos para eliminar las tareas del grupo seleccionado
 
+//Funcion para que por cada grupo seleccioando despliegue las tareas de cada grupo
+function selecttarea() {
+  while (tareaDelete.hasChildNodes()) {
+      tareaDelete.removeChild(tareaDelete.firstChild);
+  }
+  //Esta ref y con la funcion de abajo haria que se recorriean todos los alumnos pero las tareas se repetirian por eso se pone un limitToFirst porque con eso solo obtendra las del primer alumno pero esta bien porque todos los alumnos deben de tener las mismas tareas
+var refTarea= db2.ref('Grupos/'+grupoDelete.value+"/Alumnos/").limitToFirst(1);
+//console.log(refTarea);
+refTarea.on("child_added",function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
+        childSnapshot.forEach(function(childchildSnapshot) {
+            var u = document.createElement("option");
+            u.setAttribute("value",childchildSnapshot.val().Nombre);
+            var w = document.createTextNode(childchildSnapshot.val().Nombre);
+            u.appendChild(w);
+            tareaDelete.appendChild(u);
+          });
+
+        });
+  });
+
+  refTarea.on("child_changed",function(snapshot){
+    while (tareaDelete.hasChildNodes()) {
+        tareaDelete.removeChild(tareaDelete.firstChild);
+    }
+        snapshot.forEach(function(childSnapshot) {
+
+          childSnapshot.forEach(function(childchildSnapshot) {
+              var u = document.createElement("option");
+              u.setAttribute("value",childchildSnapshot.val().Nombre);
+              var w = document.createTextNode(childchildSnapshot.val().Nombre);
+              u.appendChild(w);
+              document.getElementById("tareaDelete").appendChild(u);
+            });
+
+          });
+    });
+
+    refTarea.on("child_removed",function(snapshot){
+      while (tareaDelete.hasChildNodes()) {
+          tareaDelete.removeChild(tareaDelete.firstChild);
+      }
+          snapshot.forEach(function(childSnapshot) {
+
+            childSnapshot.forEach(function(childchildSnapshot) {
+                var u = document.createElement("option");
+                u.setAttribute("value",childchildSnapshot.val().Nombre);
+                var w = document.createTextNode(childchildSnapshot.val().Nombre);
+                u.appendChild(w);
+                document.getElementById("tareaDelete").appendChild(u);
+              });
+
+            });
+      });
+
+}
 
 
+// Borrar la tarea seleccionada
+deleteForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-
-var refTarea= db2.ref('Grupos/'+grupoDelete.value+"/Alumnos");
-
-console.log(grupoDelete.value);
-
-  refTarea.on("child_added",function(snapshot){
-
-    console.log(snapshot.val());
-
-
+  if (!grupoDelete.value || !tareaDelete.value) return null
+  var refAlumnos2= db2.ref('Grupos/'+grupoDelete.value+ "/Alumnos");
+  refAlumnos2.on("child_added",function(snapshot){
+  db2.ref('Grupos/'+grupoDelete.value+ "/Alumnos/"+snapshot.key+"/Tareas/"+tareaDelete.value).remove();
 
   });
+  alert("Fue eliminada con exito");
+
+
+});
