@@ -94,7 +94,7 @@ CalificacionForm.addEventListener('submit', (e) => {
   if (!calificacion.value || !comentario.value) return null
 
   var refCalificar= db2.ref('Grupos/'+grupo.value+"/Alumnos/"+alumno.value+"/Tareas/"+tarea.value).update({
-    Tarea:tarea.value,
+    Nombre:tarea.value,
     Calificacion: calificacion.value,
     Comentario: comentario.value
 
