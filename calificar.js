@@ -11,6 +11,8 @@
   firebase.initializeApp(config);
 
   var db2 = firebase.database();
+  var ref = db2.ref("admin/");
+
 
   var CalificacionForm = document.getElementById('CalificacionForm');
   var grupo = document.getElementById('grupo');
@@ -20,7 +22,40 @@
 
   var calificacion = document.getElementById('calificacion');
   var comentario = document.getElementById('comentario');
+  var logout = document.getElementById('logout');
 
+  firebase.auth().onAuthStateChanged(function (user)
+  {
+      if (user)
+      {
+          console.log("Tenemos usuario");
+          // console.log(user.uid);
+          var administrador;
+          ref.once("value").then(function(snapshot)
+          {
+              if (snapshot.hasChild(user.uid))
+              {
+                  console.log("Bienvenido eres administrador");
+              }
+              else
+              {
+                  console.log("Eres alumno no profesor no puedes acceder aqui");
+                  firebase.auth().signOut();
+              }
+          });
+      }
+      else
+      {
+          console.log("No tenemos usuario");
+          location.href ="index.html";
+
+      }
+  });
+
+  logout.addEventListener("click",function(){
+    firebase.auth().signOut();
+
+  });
 
 
 

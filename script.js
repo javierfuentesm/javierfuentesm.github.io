@@ -9,12 +9,46 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
+var ref = db.ref("admin/");
 
 
 var groupForm = document.getElementById('groupForm');
 var groupname = document.getElementById('groupname');
 var password = document.getElementById('password');
 var hiddenId   = document.getElementById('hiddenId');
+var logout = document.getElementById('logout');
+
+firebase.auth().onAuthStateChanged(function (user)
+{
+    if (user)
+    {
+        console.log("Tenemos usuario");
+        // console.log(user.uid);
+        var administrador;
+        ref.once("value").then(function(snapshot)
+        {
+            if (snapshot.hasChild(user.uid))
+            {
+                console.log("Bienvenido eres administrador");
+            }
+            else
+            {
+                console.log("Eres alumno no profesor no puedes acceder aqui");
+                firebase.auth().signOut();
+            }
+        });
+    }
+    else
+    {
+        console.log("No tenemos usuario");
+        location.href ="index.html";
+
+    }
+});
+logout.addEventListener("click",function(){
+  firebase.auth().signOut();
+
+});
 
 
 groupForm.addEventListener('submit', (e) => {

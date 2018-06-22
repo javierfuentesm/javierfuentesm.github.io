@@ -1,52 +1,75 @@
-<html>
-<head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Firebase realtime database CRUD example</title>
-     <link rel="stylesheet" href="main.css">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-   </head>
-<div class='container'>
-  <div class="header">
-    <h1>Polilibro</h1>
-    <br>
-    <h4>Da de alta grupos</h4>
-<br><br>
-<a class="btn btn-primary" href="tareas.html" role="button">Tareas</a>
-<a class="btn btn-primary" href="calificar.html" role="button">Calificaciones</a>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  </div>
-
-<form id="groupForm">
-  <input type="hidden" id='hiddenId' />
-
-  Nombre del Grupo
-  <br>
-  <input type="text" id="groupname">
-  <br>
-  Contraseña de Grupo
-  <br>
-  <input type="text" id="password">
-  <br>
-  <button type='submit'> Enviar</button>
-</form>
-<br>
-  <h4>Elimina/Modifica Grupos</h4>
-    <ul id='grupos'></ul>
-
-
-</div>
-</body>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
-<script src="script.js">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
 </script>
-</html>
+    <div class="container">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Sign In</div>
+                      </div>
+
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                        <form id="loginform" class="form-horizontal" role="form">
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+                                    </div>
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" id="password" placeholder="password">
+                                    </div>
+
+
+
+
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                      <a id="btn-login" href="" class="btn btn-success">Login  </a>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+    <script src="login.js"></script>
+
+    </html>

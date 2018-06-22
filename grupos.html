@@ -8,50 +8,39 @@
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </head>
+   </head>
 <div class='container'>
-   <div class="header">
-      <h1>Polilibro</h1>
-      <h4>Calificar a alumnos grupos.</h4>
-      <br><br>
-      <a class="btn btn-primary" href="grupos.html" role="button">Grupos</a>
-      <a class="btn btn-primary" href="tareas.html" role="button">Tareas</a>
-      <a class="btn btn-primary" id="logout" href="" role="button">Cerrar Sesion</a>
+  <div class="header">
+    <h1>Polilibro</h1>
+    <br>
+    <h4>Da de alta grupos</h4>
+<br><br>
+<a class="btn btn-primary" href="tareas.html" role="button">Tareas</a>
+<a class="btn btn-primary" href="calificar.html" role="button">Calificaciones</a>
+<a class="btn btn-primary" id="logout" href="" role="button">Cerrar Sesion</a>
 
 
-   </div>
-   <form id="CalificacionForm">
-      Selecciona el Grupo
-      <br>
-      <select id="grupo" onchange="selectalumno()">
-        <option>Selecciona un grupo</option>
-      </select>
-      <br>
-      <br><br>
-   Selecciona El alumno que deseas calificar
-   <br><br>
-   <select id="alumno">
-   </select>
-   <br><br><br>
-   Selecciona la tarea que deseas Calificar
-   <select id="tarea" onchange="selectcalificacion()">
-     <option value="">Selecciona una tarea</option>
-   </select>
 
-   <br><br><br>
-   Calificacion
-   <input type="text" id="calificacion" >
-   <br>
-   Comentario
-   <br>
-   <input type="text" id="comentario" >
-   <br><br>
+  </div>
 
-   <button type='submit'> Guardar</button>
+<form id="groupForm">
+  <input type="hidden" id='hiddenId' />
 
- </form>
+  Nombre del Grupo
   <br>
-   <br>
+  <input type="text" id="groupname">
+  <br>
+  Contraseña de Grupo
+  <br>
+  <input type="text" id="password">
+  <br>
+  <button type='submit'> Enviar</button>
+</form>
+<br>
+  <h4>Elimina/Modifica Grupos</h4>
+    <ul id='grupos'></ul>
+
+
 </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
@@ -59,5 +48,7 @@
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
-<script src="calificar.js"></script>
+<script src="script.js">
+
+</script>
 </html>
